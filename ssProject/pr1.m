@@ -1,0 +1,22 @@
+host_file = 'adio.wav';
+prop = 'adsad';
+output = 'adio1.wav';
+len = 50;
+sig1 = audio_watermarking(host_file, output, len);
+sig2 = audio_watermark_extraction(output, len, host_file);
+person_watermark_mapping(prop, sig2);
+identify_owner('w1.wav', 'watermark_mapping.mat', 'w.wav', len);
+load_mapfile();
+subplot(3,1,1);
+plot(sig1);
+title('Host signal');
+grid;
+subplot(3,1,2);
+plot(sig2);
+title('Watermark signal');
+axis([0, 100, -2, 2])
+grid;
+subplot(3,1,3);
+plot(audioread(output));
+title('Ouput File');
+grid;
